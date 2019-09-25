@@ -4,38 +4,37 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
-public class main {
+public class Main {
     public static void main(String[] args) {
-        long c;
-        long[] NK = new long[16];
+        long nomerKarty;
+        long chislo;
+        long[] massivKarty = new long[16];
         System.out.print("Введите 16-и значный номер карты:" + "\n" + "\n");
-        Scanner G = new Scanner(System.in);
-        while (!G.hasNextLong()) {
+        Scanner vvodNomera = new Scanner(System.in);
+        while (!vvodNomera.hasNextLong()) {
             System.out.print("Вы допустили ошибку, при вводе" + "\n" + "Попробуйте еще раз!" + "\n" + "\n");
-            G.next();
+            vvodNomera.next();
         }
-        c = G.nextLong();
+        nomerKarty = vvodNomera.nextLong();
 //Загоняем число в масив
-        for (int i = 15; c > 0; i--) {
-            long l = c % 10;
-
-            c /= 10;
-            NK[i] = l;
-
+        for (int i = 15; nomerKarty > 0; i--) {
+            long l = nomerKarty % 10;
+            nomerKarty /= 10;
+            massivKarty[i] = l;
         }
 //Применяем алгоритм Луна
         for (int i = 0; i < 15; i++) {
-            c = NK[i];
-            if ((c * 2) > 9) {
-                NK[i] = c * 2 - 9;
+            chislo = massivKarty[i];
+            if ((chislo * 2) > 9) {
+                massivKarty[i] = chislo * 2 - 9;
             } else {
-                NK[i] = c * 2;
+                massivKarty[i] = chislo * 2;
             }
             i++;
         }
 //Сумма после применения алгоритма
         int sum = 0;
-        for (long i : NK)
+        for (long i : massivKarty)
             sum += i;
 //Результат
         if (sum % 10 == 0) {
